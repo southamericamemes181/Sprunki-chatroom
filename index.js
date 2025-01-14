@@ -3,6 +3,8 @@ const messageArea = document.getElementById('messageArea');
 const myNameInput = document.getElementById('myname');
 const messageInput = document.getElementById('message');
 
+messageArea.innerHTML = '';
+
 function loadMessages() {
     const messages = JSON.parse(localStorage.getItem('messages')) || [];
     const messageArea = document.getElementById('messageArea');
