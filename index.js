@@ -3,6 +3,24 @@ const messageArea = document.getElementById('messageArea');
 const myNameInput = document.getElementById('myname');
 const messageInput = document.getElementById('message');
 
+function loadMessages() {
+    const messages = JSON.parse(localStorage.getItem('messages')) || [];
+    const messageArea = document.getElementById('messageArea');
+
+    messageArea.innerHTML = '';
+    messages.forEach(message => {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        messageElement.innerHTML = `<span class="username">${message.name}:</span> ${message.text}`;
+        messageArea.appendChild(messageElement);
+    });
+    messageArea.scrollTop = messageArea.scrollHeight;
+}
+
+function pollMessages() {
+    setInterval(loadMessages, 2000);
+}
+
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -10,12 +28,10 @@ form.addEventListener('submit', function (e) {
     const message = messageInput.value.trim();
 
     if (name && message) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message');
-        messageElement.innerHTML = `<span class="username">${name}:</span> ${message}`;
+        const messages = JSON.parse(localStorage.getItem('messages')) || [];
+        messages.push({ name: name, text: message });
 
-        messageArea.appendChild(messageElement);
-        messageArea.scrollTop = messageArea.scrollHeight;
+        localStorage.setItem('messages', JSON.stringify(messages));
 
         messageInput.value = '';
         messageInput.focus();
@@ -23,3 +39,6 @@ form.addEventListener('submit', function (e) {
 
     console.log('sent message');
 });
+
+loadMessages();
+pollMessages();
