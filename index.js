@@ -12,7 +12,7 @@ form.addEventListener('submit', function (e) {
     if (name && message) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message');
-        messageElement.innerHTML = `<span>${name}</span> ${message}`;
+        messageElement.innerHTML = `<span class="username">${name}:</span> ${message}`;
 
         messageArea.appendChild(messageElement);
         messageArea.scrollTop = messageArea.scrollHeight;
