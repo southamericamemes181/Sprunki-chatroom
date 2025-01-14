@@ -40,3 +40,5 @@ form.addEventListener('submit', function (e) {
 
 loadMessages();
 pollMessages();
+
+localStorage.removeItem('messages');
