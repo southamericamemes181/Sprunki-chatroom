@@ -19,6 +19,10 @@ function loadMessages() {
     messageArea.scrollTop = messageArea.scrollHeight;
 }
 
+function pollMessages() {
+    setInterval(loadMessages, 500); // 0.5 seconds
+}
+
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -34,8 +38,7 @@ form.addEventListener('submit', function (e) {
         messageInput.value = '';
         messageInput.focus();
     }
-
-    console.log('sent message');
 });
 
 loadMessages();
+pollMessages();
