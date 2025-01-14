@@ -18,7 +18,7 @@ function loadMessages() {
 }
 
 function pollMessages() {
-    setInterval(loadMessages, 2000);
+    setInterval(loadMessages, 500);
 }
 
 form.addEventListener('submit', function (e) {
