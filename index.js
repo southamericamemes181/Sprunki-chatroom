@@ -11,7 +11,10 @@ function loadMessages() {
     messages.forEach(message => {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message');
-        messageElement.innerHTML = `<span class="username">${message.name}:</span> ${message.text}`;
+
+        const time = new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        messageElement.innerHTML = `<span class="username">${message.name}:</span> ${message.text} <span class="timestamp">(${time})</span>`;
         messageArea.appendChild(messageElement);
     });
     messageArea.scrollTop = messageArea.scrollHeight;
@@ -29,8 +32,9 @@ form.addEventListener('submit', function (e) {
 
     if (name && message) {
         const messages = JSON.parse(localStorage.getItem('messages')) || [];
-        messages.push({ name: name, text: message });
+        const timestamp = Date.now();
 
+        messages.push({ name: name, text: message, timestamp: timestamp });
         localStorage.setItem('messages', JSON.stringify(messages));
 
         messageInput.value = '';
@@ -41,4 +45,4 @@ form.addEventListener('submit', function (e) {
 loadMessages();
 pollMessages();
 
-localStorage.removeItem('messages');
+localStorage.removeItem('messages'); // only used for testing purposes

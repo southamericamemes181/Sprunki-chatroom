@@ -63,3 +63,9 @@ body {
     font-weight: bold;
     color: #0a5274;
 }
+
+.timestamp {
+    font-size: 0.6em;
+    color: gray;
+    margin-left: 6px;
+}
